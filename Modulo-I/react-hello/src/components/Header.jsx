@@ -1,8 +1,10 @@
-export default function Header() {
+import "./Header.css";
+
+export default function Header({ children }) {
   return (
     <header>
-      <div className="bg-gray-100 mx-auto p-4">
-        <h1 className="text-center font-semibold text-xl">react-hello</h1>
+      <div className="container">
+        <h1>{children}</h1>
       </div>
     </header>
   );
