@@ -1,0 +1,11 @@
+.timer-container {
+  text-align: right;
+  margin-top: -10px;
+}
+
+.timer-container span {
+  background-color: #eca6a6;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
