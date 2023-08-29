@@ -7,11 +7,31 @@ import { getAgeFrom } from "./helpers/dateHelpers";
 import { getNewId } from "./services/idService";
 import Timer from "./components/Timer";
 import CheckBoxInput from "./components/CheckBoxInput";
+import OnlineOffline from "./components/OnlineOffline";
 
 export default function App() {
   const [name, setName] = useState("Raphael");
   const [birthDate, setBirthDate] = useState("1982-12-22");
   const [showTimer, setShowTimer] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    function toggleIsOnline() {
+      setIsOnline(true);
+    }
+
+    function toggleOffline() {
+      setIsOnline(false);
+    }
+
+    window.addEventListener("online", toggleIsOnline);
+    window.addEventListener("offline", toggleOffline);
+
+    return () => {
+      window.removeEventListener("online", toggleIsOnline);
+      window.removeEventListener("offline", toggleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     document.title = name;
@@ -33,6 +53,7 @@ export default function App() {
     <>
       <Header>react-hello</Header>
       <Main>
+        <OnlineOffline isOnline={isOnline} />
         {showTimer && <Timer />}
 
         <CheckBoxInput

@@ -1,0 +1,16 @@
+.on-container {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bg-green {
+  background-color: green;
+  color: #fff;
+  padding: 1rem;
+}
+
+.bg-red {
+  background-color: red;
+  color: #fff;
+  padding: 1rem;
+}
