@@ -3,15 +3,16 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import TextInput from "../components/TextInput";
 import { allCountries } from "../data/countries";
+import Countries from "../components/Countries";
 
 export default function ReactCountriesPage() {
-  const [countryFilter, setCountryFilter] = useState("Argentina");
+  const [countryFilter, setCountryFilter] = useState("");
 
   function handleCountryFilterChange(newCountryFilter) {
     setCountryFilter(newCountryFilter);
   }
 
-  const countryFilteredLowercase = countryFilter.toLocaleLowerCase();
+  const countryFilteredLowercase = countryFilter.trim().toLocaleLowerCase();
 
   const filteredCountries =
     countryFilteredLowercase.length >= 3
@@ -32,6 +33,7 @@ export default function ReactCountriesPage() {
           inputValue={countryFilter}
           onInputChange={handleCountryFilterChange}
         />
+        <Countries>{filteredCountries}</Countries>
       </Main>
     </div>
   );
