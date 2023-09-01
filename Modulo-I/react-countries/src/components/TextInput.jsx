@@ -23,6 +23,7 @@ export default function TextInput({
         autoFocus={autoFocus}
         value={inputValue}
         onChange={handleInputChange}
+        autoComplete="off"
       />
     </div>
   );

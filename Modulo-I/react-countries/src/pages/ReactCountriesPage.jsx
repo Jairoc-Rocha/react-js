@@ -7,9 +7,25 @@ import Countries from "../components/Countries";
 
 export default function ReactCountriesPage() {
   const [countryFilter, setCountryFilter] = useState("");
+  const [visitedCountries, setVisitedCountries] = useState([]);
 
   function handleCountryFilterChange(newCountryFilter) {
     setCountryFilter(newCountryFilter);
+  }
+
+  function toggleVisitedCountry(countryId) {
+    let newVisitedCountries = [...visitedCountries];
+
+    const isCountryVisited = newVisitedCountries.indexOf(countryId) !== -1;
+
+    if (isCountryVisited) {
+      newVisitedCountries = newVisitedCountries.filter((visitedCountryId) => {
+        return visitedCountryId !== countryId;
+      });
+    } else {
+      newVisitedCountries.push(countryId);
+    }
+    setVisitedCountries(newVisitedCountries);
   }
 
   const countryFilteredLowercase = countryFilter.trim().toLocaleLowerCase();
@@ -21,7 +37,7 @@ export default function ReactCountriesPage() {
         })
       : allCountries;
 
-  console.log(filteredCountries);
+  console.log(visitedCountries);
 
   return (
     <div>
@@ -32,8 +48,11 @@ export default function ReactCountriesPage() {
           labelDescription="Informe o nome do país (pelo menos 3 caracteres)"
           inputValue={countryFilter}
           onInputChange={handleCountryFilterChange}
+          autoFocus
         />
-        <Countries>{filteredCountries}</Countries>
+        <Countries onCountryClick={toggleVisitedCountry}>
+          {filteredCountries}
+        </Countries>
       </Main>
     </div>
   );
