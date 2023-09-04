@@ -4,6 +4,7 @@
   border: 1px solid #ccc;
   padding: 1rem;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .w-48 {
@@ -12,4 +13,8 @@
 
 ul li {
   list-style: none;
+}
+
+.bg-green {
+  background-color: #9fad9f;
 }

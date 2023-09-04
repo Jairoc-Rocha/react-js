@@ -4,6 +4,7 @@ import Item from "./Item";
 export default function Country({
   children: country = null,
   onCountryClick = null,
+  isVisited = false,
 }) {
   if (!country) {
     return <div>Impossível renderizar o país</div>;
@@ -18,8 +19,13 @@ export default function Country({
   const demographicDensity = country.population / country.area;
   const { flag, name, capital, region, population, area } = country;
 
+  const isVisitedClassName = isVisited ? "bg-green" : "";
+
   return (
-    <div onClick={handleCountryClick} className="country-container">
+    <div
+      onClick={handleCountryClick}
+      className={`country-container ${isVisitedClassName}`}
+    >
       <img className="w-48" src={flag} alt={name} />
       <ul>
         <li>
