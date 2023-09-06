@@ -1,9 +1,12 @@
+import { sanitizedBackend } from "../api/api";
 import "./Main.css";
 
 export default function Main() {
   return (
     <main className="container-main">
-      <h4> o conteudo vai ficar aqui</h4>
+      <pre>
+        <code>{JSON.stringify(sanitizedBackend, null, 2)}</code>
+      </pre>
     </main>
   );
 }
