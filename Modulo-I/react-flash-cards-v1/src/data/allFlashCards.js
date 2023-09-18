@@ -1,6 +1,6 @@
 import { getNewId } from "../services/idService";
 
-export const allFlashCard = [
+export const allFlashCards = [
   {
     title: "JSX",
     description:
@@ -52,8 +52,6 @@ export const allFlashCard = [
   },
 ]
   .map((item) => {
-    return { ...item, id: getNewId() };
+    return { id: getNewId(), ...item, showTitle: true };
   })
-  .sort((a, b) => {
-    return a.title.localeCompare(b.title);
-  });
+  .sort((a, b) => a.title.localeCompare(b.title));

@@ -4,27 +4,48 @@ import FlashCard from "../components/FlashCard";
 import FlashCards from "../components/FlashCards";
 import Header from "../components/Header";
 import Main from "../components/Main";
-import { allFlashCard } from "../data/allFlashCards";
+import { allFlashCards } from "../data/allFlashCards";
 import { helperShuffleArray } from "../helpers/arrayHelpers";
 import RadioButton from "../components/RadioButton";
 
 import "./FlashCardsPage.css";
 
 export default function FlashCardsPage() {
-  const [allcards, setAllCards] = useState(allFlashCard);
-  const [showTitle, setShowTitle] = useState(true);
+  const [allcards, setAllCards] = useState(allFlashCards);
+  const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
   function handleButtonClick() {
     const suffledCards = helperShuffleArray(allcards);
+
     setAllCards(suffledCards);
   }
 
   function handleRadioShowDescriptionClick() {
-    setShowTitle(false);
+    //prettier-ignore
+    const updatedCards = 
+    [...allcards].map((card) => ({ ...card, showTitle: false}));
+
+    setAllCards(updatedCards);
+
+    setRadioButtonShowTitle(false);
   }
 
   function handleRadioShowTitleClick() {
-    setShowTitle(true);
+    //prettier-ignore
+    const updatedCards = 
+    [...allcards].map((card) => ({ ...card, showTitle: true}));
+
+    setAllCards(updatedCards);
+
+    setRadioButtonShowTitle(true);
+  }
+
+  function handleToggleFlashCard(cardId) {
+    const updatedCards = [...allcards];
+    const cardIndex = updatedCards.findIndex((card) => card.id === cardId);
+    updatedCards[cardIndex].showTitle = !updatedCards[cardIndex].showTitle;
+
+    setAllCards(updatedCards);
   }
 
   return (
@@ -36,7 +57,7 @@ export default function FlashCardsPage() {
           <RadioButton
             id="radioButtonShowTitle"
             name="showInfo"
-            buttonChecked={showTitle}
+            buttonChecked={radioButtonShowTitle}
             onButtonClick={handleRadioShowTitleClick}
           >
             Mostrar Título
@@ -44,7 +65,7 @@ export default function FlashCardsPage() {
           <RadioButton
             id="radioButtonShowDiscription"
             name="showInfo"
-            buttonChecked={showTitle}
+            buttonChecked={radioButtonShowTitle}
             onButtonClick={handleRadioShowDescriptionClick}
           >
             Mostrar Descrição
@@ -52,9 +73,16 @@ export default function FlashCardsPage() {
         </div>
 
         <FlashCards>
-          {allcards.map(({ id, title, description }) => {
+          {allcards.map(({ id, title, description, showTitle }) => {
             return (
-              <FlashCard key={id} title={title} description={description} />
+              <FlashCard
+                key={id}
+                id={id}
+                title={title}
+                description={description}
+                showFlashCardTitle={showTitle}
+                onToggleFlashCard={handleToggleFlashCard}
+              />
             );
           })}
         </FlashCards>

@@ -1,28 +1,26 @@
-import { useState } from "react";
 import "./FlashCard.css";
-import { allFlashCard } from "../data/allFlashCards";
 
 export default function FlashCard({
+  id,
   title = "Título do card",
   description = "Descrição do card que pode conter mais palavras que o título",
+  showFlashCardTitle = true,
+  onToggleFlashCard = null,
 }) {
-  const [showTitle, setShowTitle] = useState(true);
-
   function handleCardClick() {
-    // setShowTitle(!showTitle);
-    setShowTitle((currentShowTitle) => !currentShowTitle);
+    if (onToggleFlashCard) {
+      onToggleFlashCard(id);
+    }
   }
 
-  const showSizeClassName = showTitle ? "text-xl" : "text-md";
-
-  console.log(allFlashCard);
+  const showSizeClassName = showFlashCardTitle ? "text-xl" : "text-md";
 
   return (
     <div
       className={`flash-container ${showSizeClassName}`}
       onClick={handleCardClick}
     >
-      {showTitle ? title : description}
+      {showFlashCardTitle ? title : description}
     </div>
   );
 }

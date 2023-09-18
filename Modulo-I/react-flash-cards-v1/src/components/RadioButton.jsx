@@ -6,7 +6,7 @@ export default function RadioButton({
   name = "radioButtonName",
   children: buttonDescription = "Descrição do botão",
   buttonChecked = false,
-  onButtonClick = false,
+  onButtonClick = null,
 }) {
   function handleRadioButtonChange() {
     if (onButtonClick) {
