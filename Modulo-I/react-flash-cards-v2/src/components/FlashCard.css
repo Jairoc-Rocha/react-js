@@ -1,0 +1,23 @@
+.flash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 5px 25px 5px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  margin-top: -25px;
+  margin-right: 30px;
+  width: 20rem;
+  height: 12rem;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+.text-xl {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.text-md {
+  font-size: 1rem;
+  font-weight: bold;
+}
