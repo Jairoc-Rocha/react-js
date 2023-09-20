@@ -18,6 +18,12 @@ export default function FlashCardItem({
     }
   }
 
+  function handleEditIconClick() {
+    if (onEdit) {
+      onEdit(flashCard);
+    }
+  }
+
   return (
     <div className="item-container">
       <ul>
@@ -29,7 +35,11 @@ export default function FlashCardItem({
         </li>
       </ul>
       <div className="icons-container">
-        <EditIcon className="edit-icon" size={24} />
+        <EditIcon
+          onClick={handleEditIconClick}
+          className="edit-icon"
+          size={24}
+        />
         <DeleteIcon
           onClick={handleDeleteIconClick}
           className="delete-icon"

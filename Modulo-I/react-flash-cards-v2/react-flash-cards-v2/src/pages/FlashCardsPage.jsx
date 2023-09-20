@@ -16,6 +16,7 @@ import Error from "../components/Error";
 import "./FlashCardsPage.css";
 import { apiGetAllFlashCards } from "../services/apiService";
 import FlashCardItem from "../components/FlashCardItem";
+import FlashCardForm from "../components/FlashCardForm";
 
 export default function FlashCardsPage() {
   // Back End
@@ -26,6 +27,7 @@ export default function FlashCardsPage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [createMode, setCreateMode] = useState(true);
 
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
@@ -95,7 +97,11 @@ export default function FlashCardsPage() {
   }
 
   function handleDeleteFlashCard(cardId) {
-    console.log(cardId);
+    setAllCards(allcards.filter((card) => card.id !== cardId));
+  }
+
+  function handleEditFlashCard(card) {
+    setCreateMode(false);
   }
 
   let mainJsx = <Loading />;
@@ -120,6 +126,7 @@ export default function FlashCardsPage() {
                 <FlashCardItem
                   key={flashCard.id}
                   onDelete={handleDeleteFlashCard}
+                  onEdit={handleEditFlashCard}
                 >
                   {flashCard}
                 </FlashCardItem>
@@ -127,7 +134,9 @@ export default function FlashCardsPage() {
             })}
           </TabPanel>
 
-          <TabPanel>Cadastro</TabPanel>
+          <TabPanel>
+            <FlashCardForm createMode={createMode} />
+          </TabPanel>
 
           <TabPanel>
             <Button onButtonClick={handleShuffle}>Ambaralhar cards</Button>
