@@ -28,6 +28,8 @@ export default function FlashCardsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [createMode, setCreateMode] = useState(true);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedFlahsCard, setSelectedFlahsCard] = useState(null);
 
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
@@ -102,6 +104,12 @@ export default function FlashCardsPage() {
 
   function handleEditFlashCard(card) {
     setCreateMode(false);
+    setSelectedTab(1);
+    selectedFlahsCard(card);
+  }
+
+  function handleTabSelect(tabIndex) {
+    setSelectedTab(tabIndex);
   }
 
   let mainJsx = <Loading />;
@@ -113,7 +121,7 @@ export default function FlashCardsPage() {
   if (!loading) {
     mainJsx = (
       <>
-        <Tabs>
+        <Tabs selectedIndex={selectedTab} onSelect={handleTabSelect}>
           <TabList>
             <Tab>Listagem</Tab>
             <Tab>Cadastro</Tab>
